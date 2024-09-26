@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>معلومات البطاقة</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+</head>
+<body>
+
+<div class="container" id="content" style="display: none;">
+  <div class="header">
+    <div class="welcome-message">
+      <span class="greeting">أهلاً،</span>
+      <span id="userName" class="user-name"></span>
+    </div>
+    <div class="countdown-timer">
+      <svg class="circular-chart" viewBox="0 0 36 36">
+        <path class="circle-bg" d="M18 2.084 
+          a 15.916 15.916 0 1 1 0 31.832 
+          a 15.916 15.916 0 1 1 0 -31.832" />
+        <path class="circle" 
+          stroke-dasharray="100, 100" 
+          d="M18 2.084 
+          a 15.916 15.916 0 1 1 0 31.832 
+          a 15.916 15.916 0 1 1 0 -31.832" />
+      </svg>
+      <span id="timer">1</span> متبقي بالثواني
+    </div>
+    <img id="userAvatar" src="" alt="user-avatar" class="avatar">
+  </div>
+  
+  <div class="card">
+    <div class="card-header">
+      <span class="card-logo"> Urpay | تفعيل نايترو</span>
+    </div>
+  </div>
+  
+  <div class="card-info">
+    <div class="card-details">
+      <div>
+        <span>رقم البطاقة</span>
+        <span>
+          <span id="cardNumber"></span>
+          <button class="copy-button" data-type="cardNumber">نسخ</button>
+        </span>
+      </div>
+      <div>
+        <span>اسم صاحب البطاقة</span>
+        <span>
+          <span id="cardHolder"></span>
+          <button class="copy-button" data-type="cardHolder">نسخ</button>
+        </span>
+      </div>
+      <div>
+        <span>تاريخ الانتهاء</span>
+        <span>
+          <span id="expiryDate"></span>
+          <button class="copy-button" data-type="expiryDate">نسخ</button>
+        </span>
+      </div>
+      <div>
+        <span>رمز CVV</span>
+        <span>
+          <span id="cvv"></span>
+          <button class="copy-button" data-type="cvv">نسخ</button>
+        </span>
+      </div>
+    </div>
+    
+    <div class="card-info">
+      <button class="more-info-button" onclick="window.location.href='more-info.html'">معلومات أكثر</button>
+      <button id="activateButton" class="activate-button">تم التفعيل</button>
+    </div>
+  </div>
+
+  <footer>
+    <p>جميع الحقوق محفوظة &copy; 2024</p>
+  </footer>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const user = JSON.parse(localStorage.getItem('user'));
+    const cardNumber = localStorage.getItem('cardNumber') || '4909800004476633';
+    const cardHolder = localStorage.getItem('cardHolder') || 'SAYF DIAB';
+    const expiryDate = localStorage.getItem('expiryDate') || '09/27';
+    const cvv = localStorage.getItem('cvv') || '373';
+
+    // تحقق من حالة المستخدم
+    const sessionEndTime = localStorage.getItem('sessionEndTime');
+    const currentTime = Math.floor(Date.now() / 1000);
+
+    if (!user || (sessionEndTime && currentTime > sessionEndTime)) {
+        localStorage.removeItem('user');
+        localStorage.removeItem('sessionEndTime');
+        window.location.href = 'login.html';
+        return;
+    }
+
+    document.getElementById('userName').textContent = user.name;
+    document.getElementById('userAvatar').src = user.image;
+
+    // تعيين قيم البطاقة
+    document.getElementById('cardNumber').textContent = cardNumber;
+    document.getElementById('cardHolder').textContent = cardHolder;
+    document.getElementById('expiryDate').textContent = expiryDate;
+    document.getElementById('cvv').textContent = cvv;
+
+    // بدء العد التنازلي
+    if (sessionEndTime) {
+        const timeLeft = sessionEndTime - currentTime;
+
+        if (timeLeft > 0) {
+            startTimer(timeLeft);
+        } else {
+            localStorage.removeItem('sessionEndTime');
+            window.location.href = 'login.html';
+        }
+    } else {
+        startTimer(120);
+    }
+
+    document.getElementById('content').style.display = 'block';
+});
+
+// إعداد العداد
+let countdown;
+const timerElement = document.getElementById('timer');
+
+function startTimer(seconds) {
+    countdown = seconds;
+    timerElement.textContent = countdown;
+    updateCircle();
+
+    const sessionEndTime = Math.floor(Date.now() / 1000) + countdown;
+    localStorage.setItem('sessionEndTime', sessionEndTime);
+
+    const interval = setInterval(() => {
+        countdown--;
+        timerElement.textContent = countdown;
+        updateCircle();
+
+        if (countdown <= 0) {
+            clearInterval(interval);
+            localStorage.removeItem('sessionEndTime');
+            localStorage.removeItem('user');
+            window.location.href = 'login.html';
+        }
+    }, 1000);
+}
+
+// تحديث شكل الدائرة
+function updateCircle() {
+    const percent = (countdown / 120) * 100;
+    document.querySelector('.circle').style.strokeDasharray = `${percent}, 100`;
+}
+
+// وظيفة النسخ
+const copyButtons = document.querySelectorAll('.copy-button');
+copyButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        const type = e.target.dataset.type;
+        const text = document.getElementById(type).textContent.trim();
+        navigator.clipboard.writeText(text).then(() => {
+            e.target.textContent = 'تم النسخ!';
+            setTimeout(() => {
+                e.target.textContent = 'نسخ';
+            }, 2000);
+        }).catch(err => {
+            console.error('فشل النسخ', err);
+        });
+    });
+});
+
+// تفعيل زر "تم التفعيل"
+const activateButton = document.getElementById('activateButton');
+activateButton.addEventListener('click', () => {
+    const webhookUrl = 'https://ptb.discord.com/api/webhooks/1288802479991164928/DOAkdiZEvZkwFqtXzSvFTf1wobFCjcnmhwfIj5ge8OcsT5NDqC6jQJkr85QkXC0iJ2Jb'; // استبدل هذا برابط Webhook الخاص بك
+    const cardLastFourDigits = document.getElementById('cardNumber').textContent.slice(-4); // آخر 4 أرقام من البطاقة
+    const userName = document.getElementById('userName').textContent; // اسم المستخدم
+
+    const payload = {
+        content: `**تم التفعيل بواسطة ${userName} البطاقة المنتهية بـ ${cardLastFourDigits}**`
+    };
+
+    // إرسال البيانات إلى Discord عبر Webhook
+    fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    })
+    .then(response => {
+        if (response.ok) {
+            // إذا تم الإرسال بنجاح، قم بتوجيه المستخدم إلى صفحة done.html
+            window.location.href = 'done.html';
+            setTimeout(() => {
+                localStorage.removeItem('sessionEndTime'); // إزالة وقت نهاية الجلسة
+                localStorage.removeItem('user'); // إزالة معلومات المستخدم
+                window.location.href = 'login.html'; // توجيه إلى صفحة تسجيل الدخول
+            }, 5000); // تأخير 5 ثوانٍ قبل توجيه المستخدم
+        } else {
+            console.error('فشل في إرسال البيانات إلى Webhook');
+        }
+    })
+    .catch(err => {
+        console.error('فشل في إرسال البيانات', err);
+    });
+});
+</script>
+</body>
+</html>

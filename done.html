@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نجاح العملية</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .success-container {
+            text-align: center;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 90%;
+            max-width: 400px;
+        }
+
+        .success-image {
+            width: 100px; /* Adjust the size of the image here */
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 0 0 10px;
+        }
+
+        p {
+            font-size: 16px;
+            margin: 0 0 20px;
+        }
+
+        .redirect-message {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        // Redirect after 5 seconds
+        setTimeout(() => {
+            window.location.href = 'login.html';
+        }, 5000);
+    </script>
+</head>
+<body>
+
+<div class="success-container">
+    <img src="success.png" alt="نجاح" class="success-image">
+    <h1>تم تسجيلها بنجاح</h1>
+    <p>شكرًا لاستخدامك خدماتنا.</p>
+    <div class="redirect-message">
+        سيتم توجيهك بعد: <span id="countdown">5 ث</span>
+    </div>
+</div>
+
+<script>
+    // Countdown Timer
+    let countdown = 5;
+    const countdownElement = document.getElementById('countdown');
+
+    const interval = setInterval(() => {
+        countdown--;
+        countdownElement.textContent = `${countdown} ث`;
+
+        if (countdown <= 0) {
+            clearInterval(interval);
+        }
+    }, 1000);
+</script>
+
+</body>
+</html>

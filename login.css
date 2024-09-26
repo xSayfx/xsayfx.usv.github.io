@@ -1,0 +1,67 @@
+/* الخط الأساسي */
+body {
+  font-family: 'Baloo Bhaijaan 2', sans-serif; /* استخدام خط Baloo Bhaijaan 2 */
+  background-color: #f4f4f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* تصميم حاوية تسجيل الدخول */
+.login-container {
+  background-color: #007bff;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  color: white;
+}
+
+.login-container h1 {
+  color: white;
+  font-size: 1.6rem;
+  margin-bottom: 20px;
+}
+
+.input-container {
+  display: flex; /* استخدام flex لجعل الإدخال والزر جنبًا إلى جنب */
+  justify-content: center; /* مركز المحتوى أفقيًا */
+  align-items: center; /* مركز المحتوى عموديًا */
+}
+
+/* تصميم خانة الإدخال */
+.login-container input {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: none;
+  width: 70%; /* عرض خانة الإدخال */
+  font-size: 1rem;
+}
+
+/* تصميم زر السهم */
+.arrow-button {
+  background-color: white; /* لون الزر أبيض */
+  color: black; /* لون السهم أسود */
+  padding: 0; /* إزالة الحشوة */
+  border: none;
+  border-radius: 50%; /* جعل الزر دائري */
+  cursor: pointer;
+  width: 40px; /* عرض الزر */
+  height: 40px; /* ارتفاع الزر */
+  font-size: 1.5rem; /* حجم الخط */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); /* ظل أسود */
+  transition: background-color 0.3s ease; /* تأثير عند تغيير اللون */
+  margin-left: 5px; /* زيادة الفراغ بين خانة الإدخال والزر */
+  display: flex; /* استخدام flex لجعل السهم في المنتصف */
+  justify-content: center; /* مركز المحتوى أفقيًا */
+  align-items: center; /* مركز المحتوى عموديًا */
+}
+
+.arrow-button:hover {
+  background-color: #e0e0e0; /* لون الزر عند التحويم */
+}

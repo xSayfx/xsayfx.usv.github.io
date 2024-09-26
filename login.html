@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تسجيل الدخول</title>
+  <link rel="stylesheet" href="login.css">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="favicon.png">
+</head>
+<body>
+
+<div class="login-container">
+  <h1>تسجيل الدخول</h1>
+  <div class="input-container">
+    <input type="text" id="authCode" placeholder="ادخل كود المصادقة" required>
+    <button class="arrow-button">&#8592;</button> <!-- سهم لزر الدخول -->
+  </div>
+
+  <!-- Footer inside the container -->
+  <footer>
+    <p>جميع الحقوق محفوظة &copy; 2024</p>
+  </footer>
+</div>
+
+<script>
+  const users = {
+    "anaysu11": { name: "يوسف", image: "https://cdn.discordapp.com/avatars/509912219421507584/d77aac5d0ed3923bf3260da024a71385.webp?size=1024&animated=true&width=0&height=256" },
+    "aamaz66": { name: "مازن", image: "https://cdn.discordapp.com/avatars/1136627897034100827/a0369b1cb110e9efa28a10b6bdfa8a85.webp?size=1024&animated=true&width=0&height=256" },
+    "aasido11a": { name: "SIDO", image: "https://cdn.discordapp.com/avatars/792865048430379078/360e9bc36e2acd2beae015fee7758e9e.webp?size=1024&animated=true&width=0&height=256" },
+    "yasha15dia": { name: "شادي", image: "https://cdn.discordapp.com/avatars/708275387100037161/477449e94be481a204b73a6876ef6f57.webp?size=1024&animated=true&width=0&height=256" },
+    "sfx!!": { name: "سيف", image: "https://cdn.discordapp.com/avatars/622017604449730564/f1fcd1900042190fe09d2bc99ee80cd9.webp?size=1024&animated=true&width=0&height=256" },
+    // أضف المزيد من الرموز والمستخدمين هنا
+  };
+
+  document.querySelector('.arrow-button').addEventListener('click', function() {
+    const authCode = document.getElementById('authCode').value;
+    const user = users[authCode];
+
+    if (user) {
+      // تخزين معلومات المستخدم في localStorage
+      localStorage.setItem('user', JSON.stringify(user));
+      window.location.href = 'index.html'; // الانتقال إلى صفحة الفيزا
+    } else {
+      alert('كود غير صحيح');
+    }
+  });
+</script>
+  
+</body>
+</html>

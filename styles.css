@@ -1,0 +1,192 @@
+/* الخط الأساسي */
+body {
+  font-family: 'Tajawal', sans-serif; /* استخدام خط Tajawal */
+  background-color: #f4f4f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
+
+/* تصميم صفحة عرض البطاقة */
+.container {
+  background-color: #004fc4;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  color: white;
+  position: relative; /* جعل الحاوية ثابتة */
+  overflow: hidden; /* إخفاء المحتوى الزائد */
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.welcome-message {
+  flex-grow: 1; /* جعل رسالة الترحيب تنمو */
+  text-align: right; /* محاذاة النص إلى اليمين */
+}
+
+.greeting {
+  color: white; /* لون "أهلاً" */
+  font-size: 1.5rem; /* حجم الخط */
+}
+
+.user-name {
+  color: black; /* لون اسم الشخص */
+  font-size: 1.5rem; /* حجم الخط مطابق لحجم "أهلاً" */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* إضافة ظل خلف الاسم */
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.card {
+  background-color: #005bf7;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 20px;
+  color: white;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+.card-logo {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.card-number {
+  font-size: 1.2rem;
+}
+
+.card-info {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  color: black;
+}
+
+.card-details div {
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* لضبط المحاذاة */
+}
+
+.copy-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-left: 0; /* محاذاة الزر إلى اليسار */
+}
+
+.copy-button:hover {
+  background-color: #0056b3;
+}
+
+/* زر معلومات أكثر */
+.more-info-button {
+  background-color: #007bff; /* لون زر المعلومات أكثر - أزرق */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px; /* إضافة مساحة أعلى الزر */
+  font-size: 1rem; /* حجم الخط للزر */
+}
+
+.more-info-button:hover {
+  background-color: #0056b3; /* لون الزر عند المرور عليه */
+}
+
+/* زر تم التفعيل */
+.activate-button {
+  background-color: #007bff; /* لون زر تم التفعيل - أخضر */
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 15px; /* إضافة مساحة أعلى الزر */
+  font-size: 1rem; /* حجم الخط للزر */
+}
+
+.activate-button:hover {
+  background-color: #0056b3; /* لون الزر عند المرور عليه */
+}
+
+/* أنماط العداد */
+.countdown-timer {
+  display: flex; /* استخدام flex لجعل العداد والعناصر الأخرى متناسقة */
+  align-items: center; /* محاذاة العمودي */
+  color: white; /* لون النص */
+}
+
+.circular-chart {
+  max-width: 50px; /* ضبط حجم العداد */
+  max-height: 50px; /* ضبط حجم العداد */
+  margin-left: 10px; /* إضافة مسافة بين العداد والنص */
+}
+
+.circle-bg {
+  fill: none;
+  stroke: #e6e6e6;
+  stroke-width: 3.8;
+}
+
+.circle {
+  fill: none;
+  stroke: #00bfff; /* لون الدائرة التي تعبر عن الوقت المتبقي */
+  stroke-width: 3.8;
+  transition: stroke-dasharray 1s linear; /* إضافة تأثير الانتقال */
+}
+
+.back-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px; /* Add some margin above the button */
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+footer {
+  margin-top: 20px; /* Space above the footer */
+  text-align: center; /* Center the text */
+  color: white; /* Change text color if needed */
+}
+
+/* تحسين التوافق مع الأجهزة المحمولة */
+@media (max-width: 600px) {
+  .container {
+    width: 95%; /* زيادة العرض على الأجهزة المحمولة */
+  }
+}
